@@ -5,7 +5,7 @@ import scala.annotation.tailrec
 object Transactions {
 
   def updatePerson(person: Person, pence: Double): Person = {
-    val newBalance = person.balanceInFractionalPence + pence
+    val newBalance = person.balance + pence
     new Person(person.name, newBalance)
   }
 

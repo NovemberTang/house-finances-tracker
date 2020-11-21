@@ -1,15 +1,13 @@
 package financetracker
 
-class Person(val name: String, val balanceInFractionalPence: Double) {
+class Person(val name: String, val balance: Double) {
 
-  private val roundedPence = round(balanceInFractionalPence)
-
-
+  private val roundedPence = round(balance)
   private val poundString = createPoundString(roundedPence)
 
   override def toString: String = {
-    if(balanceInFractionalPence > 0) s"$name owes £$poundString"
-    else if(balanceInFractionalPence == 0) s"$name is settled up"
+    if(balance > 0) s"$name owes £$poundString"
+    else if(balance == 0) s"$name is settled up"
     else s"$name is owed £$poundString"}
 
   private def createPoundString(wholePennies: Int): String = {

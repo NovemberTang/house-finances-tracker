@@ -1,9 +1,14 @@
 name := "house-finances-tracker"
 
-version := "0.1"
-
 scalaVersion := "2.13.4"
 
-libraryDependencies ++= Seq{
-  "org.scalatest" %% "scalatest" % "3.2.2" % Test
-}
+val circeVersion = "0.13.0"
+val scalaTestVersion = "3.2.2"
+
+
+libraryDependencies ++= Seq(
+  "io.circe" %% "circe-core" % circeVersion,
+  "io.circe" %% "circe-generic" % circeVersion,
+  "io.circe" %% "circe-parser" % circeVersion,
+  "org.scalatest" %% "scalatest" % scalaTestVersion % Test
+)
