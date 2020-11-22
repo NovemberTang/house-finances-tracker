@@ -1,4 +1,4 @@
-package json
+package financetracker.json
 
 import financetracker.Person
 import org.scalatest.flatspec.AnyFlatSpec
