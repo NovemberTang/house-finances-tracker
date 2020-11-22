@@ -9,6 +9,7 @@ class PersonSpec extends AnyFlatSpec with Matchers{
     val owingPerson   = new Person("Alice", 8765.43)
     val owedPerson    = new Person("Bob", -100.43)
     val settledPerson = new Person("Carol", 0)
+
     owingPerson.toString   shouldEqual "Alice owes £87.65"
     owedPerson.toString    shouldEqual "Bob is owed £1.00"
     settledPerson.toString shouldEqual "Carol is settled up"

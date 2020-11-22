@@ -10,37 +10,13 @@ class BillSplitterSpec extends AnyFlatSpec with Matchers{
   private val alice = new Person("Alice", 0)
   private val cat = new Person("Cat", 0)
 
-  private val bobJson =
-    """{
-      |  "name" : "Bob",
-      |  "balance" : 678.0
-      |}""".stripMargin
-
-  private val aliceJson =
-    """{
-      |  "name" : "Alice",
-      |  "balance" : -9856.45
-      |}""".stripMargin
-
-  private val aliceBobJson =
-    """[
-      |  {
-      |    "name" : "Alice",
-      |    "balance" : -9856.45
-      |  },
-      |  {
-      |    "name" : "Bob",
-      |    "balance" : 678.0
-      |  }
-      |]""".stripMargin
-
   "A percentage split" should "correctly calculate the share of money owed" in {
     val result = calculatePercentageOfMoney(1500, 25)
-    result shouldEqual(375)
+    result shouldEqual 375
   }
   it should "cut decimals correctly" in {
     val result = calculatePercentageOfMoney(150, 25)
-    result shouldEqual(37.5)
+    result shouldEqual 37.5
   }
 
   "A split by proportion" should "calculate correctly" in {
