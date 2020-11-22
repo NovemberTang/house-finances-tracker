@@ -12,12 +12,12 @@ object BillSplitter {
     val borrowerList      = people.filterNot(_.name == lenderName)
 
     splitMethod match {
-      case SplitMethod.evenly =>
+      case SplitMethod.Evenly =>
         val borrowerShare = splitEqually(amount, numberOfPeople)
         val updatedLender = updatePerson(lender, -borrowerShare * numberOfBorrowers)
         updatedLender :: borrowerList.map(updatePerson(_, borrowerShare))
-      case SplitMethod.byPercentage => ???
-      case SplitMethod.byProportion => ???
+      case SplitMethod.ByPercentage => ???
+      case SplitMethod.ByProportion => ???
     }
   }
 

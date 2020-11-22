@@ -1,4 +1,4 @@
-package financetracker.io
+package financetracker.converters
 
 import java.io.{BufferedWriter, File, FileWriter}
 import financetracker.Person

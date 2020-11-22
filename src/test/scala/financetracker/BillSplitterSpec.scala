@@ -25,7 +25,7 @@ class BillSplitterSpec extends AnyFlatSpec with Matchers{
   }
 
   "Splitting equally" should "work correctly" in {
-    val actualResult = splitTheMoney("Alice", 5000, List(alice, bob, cat), SplitMethod.evenly)
+    val actualResult = splitTheMoney("Alice", 5000, List(alice, bob, cat), SplitMethod.Evenly)
     actualResult.map(_.toString) shouldEqual List("Alice is owed £33.33", "Bob owes £16.67", "Cat owes £16.67")
   }
 
