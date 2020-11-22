@@ -1,10 +1,10 @@
-package financetracker.json
+package financetracker.io
 
 import financetracker.Person
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-class JsonConverterSpec extends AnyFlatSpec with Matchers with JsonConverters {
+class JsonConverterSpec extends AnyFlatSpec with Matchers with IO {
 
   private val bob = new Person("Bob", 678)
   private val alice = new Person("Alice", -9856.45)

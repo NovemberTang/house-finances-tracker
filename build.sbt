@@ -11,3 +11,5 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-parser" % circeVersion,
   "org.scalatest" %% "scalatest" % scalaTestVersion % Test
 )
+
+coverageExcludedPackages := "financetracker/Main"

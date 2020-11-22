@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Alice",
+    "balance": "banana"
+  },
+  {
+    "name": "Bob",
+    "balance": 0
+  },
+  {
+    "name": "Cat",
+    "balance": 0
+  }
+]

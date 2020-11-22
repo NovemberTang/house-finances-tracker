@@ -1,4 +1,4 @@
-package financetracker.json
+package financetracker.io
 
 import financetracker.Person
 import io.circe._, io.circe.generic.auto._, io.circe.parser._, io.circe.syntax._
