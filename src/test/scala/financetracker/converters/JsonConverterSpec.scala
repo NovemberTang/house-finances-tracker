@@ -1,7 +1,6 @@
 package financetracker.converters
 
-import financetracker.SplitMethod.Evenly
-import financetracker.{Person, Updater}
+import financetracker.Person
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -57,39 +56,4 @@ class JsonConverterSpec extends AnyFlatSpec with Matchers with IO {
     personList.last.balance shouldEqual bob.balance
     personList.last.name    shouldEqual bob.name
   }
-
-  "An updater" should "correctly convert into a JSON string" in {
-    val updater: Updater = new Updater("Alice", "lender", 5000, Evenly)
-
-    val updaterJson = """{
-                        |  "name" : "Alice",
-                        |  "role" : "lender",
-                        |  "balance" : 5000.0,
-                        |  "split" : "Evenly"
-                        |}""".stripMargin
-
-    updaterToString(updater) shouldEqual updaterJson
-  }
-  "A list of updaters" should "convert into a JSON string" in {
-    val aliceUpdater = new Updater("Alice", "lender", 5000, Evenly)
-    val bobUpdater =  new Updater("Bob", "borrower", 5000, Evenly)
-
-    val updatersJson = """[
-                         |  {
-                         |    "name" : "Alice",
-                         |    "role" : "lender",
-                         |    "balance" : 5000.0,
-                         |    "split" : "Evenly"
-                         |  },
-                         |  {
-                         |    "name" : "Bob",
-                         |    "role" : "borrower",
-                         |    "balance" : 5000.0,
-                         |    "split" : "Evenly"
-                         |  }
-                         |]""".stripMargin
-
-    updatersToString(List(aliceUpdater, bobUpdater)) shouldEqual updatersJson
-  }
-
 }

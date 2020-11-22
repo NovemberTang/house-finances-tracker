@@ -1,15 +1,19 @@
 package financetracker.converters
 
 import java.io.{BufferedWriter, File, FileWriter}
-import financetracker.Person
+
+import financetracker.{Fraction, Person}
+
 import scala.io.Source
 
 trait IO extends JsonConverters{
 
-  def readFileToPersonList(file: Source): List[Person] = {
+  def readFileToPersonListAndFractions(file: Source): (List[Person], Option[List[Fraction]]) = {
     val jsonString = file.getLines().mkString
     file.close()
-    jsonToPeople(jsonString).getOrElse(throw new IllegalArgumentException("Input JSON improperly formatted"))
+    val peopleList = jsonToPeople(jsonString).getOrElse(throw new IllegalArgumentException("Input JSON improperly formatted"))
+    val fractionList = jsonToFractions(jsonString).getOrElse(None)
+    (peopleList, fractionList)
   }
 
   def writePeopleToFile(people: List[Person]): Unit = {
