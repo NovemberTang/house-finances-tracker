@@ -59,8 +59,6 @@ object BillSplitter {
     left ++ right.drop(1)
   }
 
-  def calculateProportion(money: Double, fraction: Fraction): Double = money * fraction.fraction
-
   private def splitEqually(money: Double, participants: Int): Double = money / participants
 
   private def getLenderIndex(lenderName: String, people: List[Person]) = people.indexWhere(p => p.name == lenderName)
