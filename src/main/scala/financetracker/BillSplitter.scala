@@ -17,8 +17,8 @@ object BillSplitter {
     val numberOfPeople = people.length
     val numberOfBorrowers = numberOfPeople - 1
 
-    val lender: Person = people.filter(_.name == lenderName).head
-    val lenderIndex = people.indexWhere(p => p.name == lenderName)
+    val lender: Person = getPerson(lenderName, people)
+    val lenderIndex = getLenderIndex(lenderName, people)
 
     val borrowerList = removeNthElement(people, lenderIndex)
     val borrowerShare = splitEqually(amount, numberOfPeople)
@@ -30,22 +30,28 @@ object BillSplitter {
   }
 
   private def splitUnevenly(lenderName: String, amount: Int, people: List[Person], fracList: List[Fraction]) = {
-    val lender: Person = people.filter(_.name == lenderName).head
-    val lenderIndex = people.indexWhere(p => p.name == lenderName)
+
+    val borrowerMap = createUnevenBorrowerMap(lenderName, amount, people, fracList)
+    val updatedBorrowers: List[Person] = updateBorrowersUnevenly(borrowerMap)
+    val amountBorrowed = borrowerMap.values.sum
+    val lender: Person = getPerson(lenderName, people)
+    val updatedLender = updatePerson(lender, -amountBorrowed)
+
+    updatedLender :: updatedBorrowers
+  }
+
+  private def createUnevenBorrowerMap(lenderName: String, amount: Int, people: List[Person], fracList: List[Fraction]) = {
+    val lenderIndex = getLenderIndex(lenderName, people)
 
     val borrowerList = removeNthElement(people, lenderIndex)
     val borrowerFractionList = removeNthElement(fracList, lenderIndex)
-    val borrowerAmountOwedList = borrowerFractionList.map(_.fraction * amount)
-    val updatedBorrowers: List[Person] = borrowerList
-      .zip(borrowerAmountOwedList).map { tup =>
-      val person = tup._1
-      val moneyOwed = tup._2
-      updatePerson(person, moneyOwed)
-    }
+    val borrowerAmountOwedList: List[Double] = borrowerFractionList.map(_.fraction * amount)
+    borrowerList.zip(borrowerAmountOwedList).toMap
+  }
 
-    val updatedLender = updatePerson(lender, -borrowerFractionList.map(_.fraction).sum * amount)
+  private def updateBorrowersUnevenly(borrowerMap: Map[Person, Double]) = {
+    borrowerMap.map(x => updatePerson(x._1, x._2)).toList
 
-    updatedLender :: updatedBorrowers
   }
 
   private def removeNthElement[T](list: List[T], elem: Int): List[T] = {
@@ -56,5 +62,10 @@ object BillSplitter {
   def calculateProportion(money: Double, fraction: Fraction): Double = money * fraction.fraction
 
   private def splitEqually(money: Double, participants: Int): Double = money / participants
+
+  private def getLenderIndex(lenderName: String, people: List[Person]) = people.indexWhere(p => p.name == lenderName)
+
+  private def getPerson(lenderName: String, people: List[Person]) = people.filter(_.name == lenderName).head
+
 
 }
